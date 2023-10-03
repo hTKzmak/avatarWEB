@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .circle {
+            width: 100px;
+            height: 100px;
+            background-color: rgb(212, 212, 212);
+            align-items: center;
+            display: flex;
+            justify-content: center;
+            font-size: 30px;
+            border-radius: 50px;
+            margin: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <input name="lol"></input>
+        <avatar-creator></avatar-creator>
+    <script>
+        class AvatarCreator extends HTMLElement {
+            connectedCallback() {
+
+                let color = [
+                    'red',
+                    'blue',
+                    'orange',
+                    'yellow',
+                    'green'
+                ]
+
+                let input = document.querySelector('input');
+                let circle = document.createElement("div");
+                circle.className = 'circle';
+                circle.textContent = 'none';
+                circle.style.backgroundColor = 'rgb(212, 212, 212)';
+                document.body.appendChild(circle);
+                input.addEventListener('keydown', function (event) {
+                    if (event.key === 'Enter') {
+                        circle.style.backgroundColor = color[Math.floor(Math.random() * color.length)];
+                        circle.textContent = input.value[0]
+                        document.body.appendChild(circle);
+                    }
+                });
+            }
+        };
+        customElements.define('avatar-creator', AvatarCreator);
+    </script>
+</body>
+
+</html>
